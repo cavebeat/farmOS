@@ -136,9 +136,15 @@ function farm_theme_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
   // Move VBO buttons to the bottom.
   $form['select']['#weight'] = 100;
 
-  // Move the "Clone" action to the end of the list.
-  if (!empty($form['select']['action::log_clone_action'])) {
-    $form['select']['action::log_clone_action']['#weight'] = 100;
+  // Move the "Clone" and "Delete" actions to the end of the list.
+  $end_actions = array(
+    'action::log_clone_action',
+    'action::views_bulk_operations_delete_item',
+  );
+  $i = 0;
+  foreach ($end_actions as $action) {
+    $form['select'][$action]['#weight'] = 100 + $i;
+    $i++;
   }
 }
 
@@ -153,6 +159,7 @@ function farm_theme_bootstrap_colorize_text_alter(&$texts) {
   $texts['matches'][t('Not Done')] = 'danger';
   $texts['matches'][t('Reschedule')] = 'warning';
   $texts['matches'][t('Clone')] = 'default';
+  $texts['matches'][t('Delete')] = 'primary';
 }
 
 /**
@@ -166,6 +173,7 @@ function farm_theme_bootstrap_iconize_text_alter(&$texts) {
   $texts['matches'][t('Not Done')] = 'unchecked';
   $texts['matches'][t('Reschedule')] = 'calendar';
   $texts['matches'][t('Clone')] = 'plus';
+  $texts['matches'][t('Delete')] = 'trash';
 }
 
 /**
