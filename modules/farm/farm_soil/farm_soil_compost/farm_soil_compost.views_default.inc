@@ -126,6 +126,7 @@ function farm_soil_compost_views_default_views() {
     'action::farm_log_movement_asset_move_action' => array(
       'selected' => 1,
       'skip_confirmation' => 1,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
